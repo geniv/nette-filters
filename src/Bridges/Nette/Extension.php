@@ -18,19 +18,6 @@ class Extension extends CompilerExtension
 {
 
     /**
-     * Load configuration.
-     */
-    public function loadConfiguration()
-    {
-        $builder = $this->getContainerBuilder();
-
-        // definice modelu
-        $builder->addDefinition($this->prefix('default'))
-            ->setClass(FilterLatte::class);
-    }
-
-
-    /**
      * Before Compile.
      */
     public function beforeCompile()
@@ -39,6 +26,6 @@ class Extension extends CompilerExtension
 
         // pripojeni filru do latte
         $builder->getDefinition('latte.latteFactory')
-            ->addSetup('addFilter', [null, $this->prefix('@default')]);
+            ->addSetup('addFilter', [null, FilterLatte::class . '::common']);
     }
 }
