@@ -13,7 +13,7 @@ or
 
 internal dependency:
 ```json
-"nette/nette": ">=2.4"
+"nette/nette": ">=2.4.0"
 ```
 
 neon configure extension:
