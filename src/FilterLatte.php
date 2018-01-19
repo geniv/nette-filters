@@ -22,7 +22,7 @@ class FilterLatte
      * @param $value
      * @return mixed
      */
-    public static function common(string $filter, string $value)
+    public static function common($filter, $value)
     {
         if (method_exists(__CLASS__, $filter)) {
             $args = func_get_args();
