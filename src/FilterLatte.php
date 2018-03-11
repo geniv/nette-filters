@@ -1,7 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Filters;
 
+use DateTime;
 use Nette\SmartObject;
 
 
@@ -9,6 +10,7 @@ use Nette\SmartObject;
  * Class FilterLatte
  *
  * @author geniv
+ * @package Filters
  */
 class FilterLatte
 {
@@ -16,13 +18,13 @@ class FilterLatte
 
 
     /**
-     * Autoloader.
+     * _loader.
      *
-     * @param $filter
-     * @param $value
+     * @param string $filter
+     * @param        $value
      * @return mixed
      */
-    public static function common($filter, $value)
+    public static function _loader(string $filter, $value)
     {
         if (method_exists(__CLASS__, $filter)) {
             $args = func_get_args();
@@ -33,13 +35,13 @@ class FilterLatte
 
 
     /**
-     * Insert text filter |addTag:'xyz'.
+     * Add tag.
      *
-     * @param $string
-     * @param $tag
-     * @return mixed
+     * @param string $string
+     * @param string $tag
+     * @return string
      */
-    public static function addTag($string, $tag)
+    public static function addTag(string $string, string $tag): string
     {
         $lastPoint = strrpos($string, '.');
         return ($tag ? substr_replace($string, sprintf('.%s.', $tag), $lastPoint, 1) : $string);
@@ -47,13 +49,33 @@ class FilterLatte
 
 
     /**
-     * Show email.
+     * Mailto.
      *
-     * @param $string
-     * @return null|string
+     * @param string $string
+     * @return string
      */
-    public static function mailto($string)
+    public static function mailto(string $string): string
     {
-        return ($string ? '<a href="mailto:' . str_replace('@', '%40', $string) . '">' . str_replace('@', '&#064;', $string) . '</a>' : null);
+        return ($string ? '<a href="mailto:' . str_replace('@', '%40', $string) . '">' . str_replace('@', '&#064;', $string) . '</a>' : '');
+    }
+
+
+    /**
+     * Date diff.
+     *
+     * @param DateTime|null $from
+     * @param DateTime|null $to
+     * @param string        $format
+     * @return string
+     */
+    public static function dateDiff(DateTime $from = null, DateTime $to = null, string $format): string
+    {
+        if (!$from) {
+            return '';
+        }
+        if (!$to) { // if not define to then to date is set today
+            $to = new DateTime();
+        }
+        return $from->diff($to)->format($format);
     }
 }
