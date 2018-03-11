@@ -13,7 +13,7 @@ or
 
 require:
 ```json
-"php": ">=5.6.0",
+"php": ">=7.0.0",
 "nette/nette": ">=2.4.0"
 ```
 
@@ -23,8 +23,11 @@ extensions:
     - Filters\Bridges\Nette\Extension
 ```
 
+`dateDiff` use: http://php.net/manual/en/class.dateinterval.php (via format)
+
 usage:
 ```latte
 {$variable|addText:'tag'}
 {$variable|mailto|noescape}
+{$date1|dateDiff:$date2:'format'}
 ```
