@@ -51,10 +51,10 @@ class FilterLatte
     /**
      * Mailto.
      *
-     * @param string $string
+     * @param string|null $string
      * @return string
      */
-    public static function mailto(string $string): string
+    public static function mailto(string $string = null): string
     {
         return ($string ? '<a href="mailto:' . str_replace('@', '%40', $string) . '">' . str_replace('@', '&#064;', $string) . '</a>' : '');
     }
