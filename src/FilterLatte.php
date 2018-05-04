@@ -78,4 +78,21 @@ class FilterLatte
         }
         return $from->diff($to)->format($format);
     }
+
+
+    /**
+     * Google maps link.
+     *
+     * @see https://developers.google.com/maps/documentation/urls/guide
+     * @param string $query
+     * @return string
+     */
+    public static function googleMapsLink(string $query): string
+    {
+        $result = $query;
+        if ($query) {
+            $result = 'https://www.google.com/maps/search/?api=1&query=' . $query;
+        }
+        return $result;
+    }
 }

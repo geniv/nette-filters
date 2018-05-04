@@ -30,4 +30,5 @@ usage:
 {$variable|addText:'tag'}
 {$variable|mailto|noescape}
 {$date1|dateDiff:$date2:'format'}
+{$coordinates|googleMapsLink}
 ```
