@@ -31,6 +31,7 @@ class FilterLatte
             array_shift($args);
             return call_user_func_array([__CLASS__, $filter], $args);
         }
+        return null;
     }
 
 
@@ -67,8 +68,9 @@ class FilterLatte
      * @param DateTime|null $to
      * @param string        $format
      * @return string
+     * @throws \Exception
      */
-    public static function dateDiff(DateTime $from = null, DateTime $to = null, string $format): string
+    public static function dateDiff(DateTime $from = null, DateTime $to = null, string $format = 'Y-m-d H:i:s'): string
     {
         if (!$from) {
             return '';
@@ -94,5 +96,19 @@ class FilterLatte
             $result = 'https://www.google.com/maps/search/?api=1&query=' . $query;
         }
         return $result;
+    }
+
+
+    /**
+     * To url.
+     *
+     * @param string $url
+     * @param string $scheme
+     * @return string
+     */
+    public static function toUrl(string $url, string $scheme = 'http://'): string
+    {
+        $http = preg_match('/^http[s]?:\/\//', $url);
+        return (!$http ? $scheme : '') . $url;
     }
 }
