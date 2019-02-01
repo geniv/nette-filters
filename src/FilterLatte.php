@@ -3,7 +3,9 @@
 namespace Filters;
 
 use DateTime;
+use Nette\Neon\Neon;
 use Nette\SmartObject;
+use Nette\Utils\Json;
 
 
 /**
@@ -110,5 +112,31 @@ class FilterLatte
     {
         $http = preg_match('/^http[s]?:\/\//', $url);
         return (!$http ? $scheme : '') . $url;
+    }
+
+
+    /**
+     * Neon.
+     *
+     * @see https://github.com/planette/nutella-project/blob/master/app/model/Latte/Filters.phps
+     * @param $value
+     * @return string
+     */
+    public static function neon($value): string
+    {
+        return Neon::encode($value, Neon::BLOCK);
+    }
+
+
+    /**
+     * Json.
+     *
+     * @param $value
+     * @return string
+     * @throws \Nette\Utils\JsonException
+     */
+    public static function json($value): string
+    {
+        return Json::encode($value);
     }
 }
