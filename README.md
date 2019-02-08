@@ -32,4 +32,5 @@ usage:
 {$date1|dateDiff:$date2:'format'}
 {$coordinates|googleMapsLink}
 {$url|toUrl}
+{$baseUrl.'/../adresa/meziadresa/nic/../../'|realUrl}
 ```
