@@ -116,9 +116,31 @@ class FilterLatte
 
 
     /**
+     * Real url.
+     *
+     * @param string $value
+     * @return string
+     */
+    public static function realUrl(string $value)
+    {
+        list($scheme, $url) = explode('//', $value);
+        $reverse = explode('/', $url);
+        $arr = [];
+        foreach ($reverse as $item) {
+            $arr[] = $item;
+            if ($item == '..') {
+                array_pop($arr);    // remove 2x from array stack
+                array_pop($arr);
+            }
+        }
+        return $scheme . '//' . implode('/', $arr);
+    }
+
+
+    /**
      * Neon.
      *
-     * @see https://github.com/planette/nutella-project/blob/master/app/model/Latte/Filters.phps
+     * @see https://github.com/planette/nutella-project/blob/master/app/model/Latte/Filters.php
      * @param $value
      * @return string
      */
