@@ -51,5 +51,7 @@ usage:
 {$baseUrl.'/../adresa/meziadresa/nic/../../'|realUrl}
 
 {$data|neon}  {*to NEON*}
+{$data|fromNeon}  {*from NEON*}
 {$data|json}  {*to JSON*}
+{$data|fromJson}  {*from JSON*}
 ```

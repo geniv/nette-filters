@@ -24,6 +24,7 @@ class FilterLatte
     /**
      * _loader.
      *
+     * @noinspection PhpUnused
      * @param string $filter
      * @param        $value
      * @return mixed
@@ -42,6 +43,7 @@ class FilterLatte
     /**
      * Add tag.
      *
+     * @noinspection PhpUnused
      * @param string $string
      * @param string $tag
      * @return string
@@ -56,6 +58,7 @@ class FilterLatte
     /**
      * Mailto.
      *
+     * @noinspection PhpUnused
      * @param string|null $string
      * @return string
      */
@@ -68,6 +71,7 @@ class FilterLatte
     /**
      * Date diff.
      *
+     * @noinspection PhpUnused
      * @param DateTime|null $from
      * @param DateTime|null $to
      * @param string        $format
@@ -89,6 +93,7 @@ class FilterLatte
     /**
      * Czech day.
      *
+     * @noinspection PhpUnused
      * @param DateTime $date
      * @return string
      */
@@ -102,6 +107,7 @@ class FilterLatte
     /**
      * Czech month.
      *
+     * @noinspection PhpUnused
      * @param DateTime $date
      * @param bool     $standard
      * @return string
@@ -117,6 +123,7 @@ class FilterLatte
     /**
      * Czech name day.
      *
+     * @noinspection PhpUnused
      * @param DateTime $date
      * @return string
      */
@@ -221,6 +228,7 @@ class FilterLatte
     /**
      * Chmod text.
      *
+     * @noinspection PhpUnused
      * @param string $file
      * @return string
      */
@@ -280,6 +288,7 @@ class FilterLatte
     /**
      * Chmod octal.
      *
+     * @noinspection PhpUnused
      * @param string $file
      * @return string
      */
@@ -295,6 +304,7 @@ class FilterLatte
     /**
      * Is readable.
      *
+     * @noinspection PhpUnused
      * @param string $file
      * @return string
      */
@@ -325,6 +335,7 @@ class FilterLatte
     /**
      * Is executable.
      *
+     * @noinspection PhpUnused
      * @param string $file
      * @return string
      */
@@ -340,6 +351,7 @@ class FilterLatte
     /**
      * File modify time.
      *
+     * @noinspection PhpUnused
      * @param string $file
      * @return string
      */
@@ -355,6 +367,7 @@ class FilterLatte
     /**
      * Google maps link.
      *
+     * @noinspection PhpUnused
      * @see https://developers.google.com/maps/documentation/urls/guide
      * @param string $query
      * @return string
@@ -372,6 +385,7 @@ class FilterLatte
     /**
      * To url.
      *
+     * @noinspection PhpUnused
      * @param string $url
      * @param string $scheme
      * @return string
@@ -386,6 +400,7 @@ class FilterLatte
     /**
      * Real url.
      *
+     * @noinspection PhpUnused
      * @param string $value
      * @return string
      */
@@ -408,25 +423,57 @@ class FilterLatte
     /**
      * Neon.
      *
+     * @noinspection PhpUnused
      * @see https://github.com/planette/nutella-project/blob/master/app/model/Latte/Filters.php
-     * @param $value
+     * @param     $value
+     * @param int $options
      * @return string
      */
-    public static function neon($value): string
+    public static function neon($value, int $options = Neon::BLOCK): string
     {
-        return Neon::encode($value, Neon::BLOCK);
+        return Neon::encode($value, $options);
+    }
+
+
+    /**
+     * From neon.
+     *
+     * @noinspection PhpUnused
+     * @param $value
+     * @return mixed
+     */
+    public static function fromNeon($value)
+    {
+        return Neon::decode($value);
     }
 
 
     /**
      * Json.
      *
-     * @param $value
+     * @noinspection PhpUnused
+     * @param     $value
+     * @param int $options
      * @return string
      * @throws JsonException
      */
-    public static function json($value): string
+    public static function json($value, int $options = 0): string
     {
-        return Json::encode($value);
+        return Json::encode($value, $options);
+    }
+
+
+    /**
+     * From json.
+     *
+     * @noinspection PhpUnused
+     * @param     $value
+     * @param int $options
+     * @return mixed
+     * @throws JsonException
+     */
+    public static function fromJson($value, int $options = Json::FORCE_ARRAY)
+    {
+        return Json::decode($value, $options);
     }
 }
